@@ -1,0 +1,49 @@
+<html>
+<head>
+  <title>The Death Countdown</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="styles.css">
+  <!-- <script src="//code.jquery.com/jquery.js"></script> -->
+</head>
+<body>
+<div class="container">
+  <h1 id="head">Countdown to my Death:</h1>
+  <ul>
+    <li><span id="days"></span>days remaining</li>
+    <li><span id="cost"></span>Costs</li>
+    <li><span id="spend"></span>Spend</li>
+  </ul>
+</div>
+<script type="text/javascript">
+let today = new Date();
+let birthday = new Date(1988,11,4);
+let death = new Date(2088,11,4);
+
+const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+// a and b are javascript Date objects
+function dateDiffInDays(a, b) {
+  // Discard the time and time-zone information.
+  const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+  const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+  return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+}
+
+const rem = dateDiffInDays(today, death);
+const req = rem * 50;
+const spend =dateDiffInDays(birthday, today) * 50;
+
+document.getElementById('days').innerText = rem.toFixed(0).replace(/\d{2}(?=(\d{3}))/g, '$&,');
+document.getElementById('cost').innerText = req.toLocaleString('en-IN', {
+				    maximumFractionDigits: 2, style: 'currency',   currency: 'INR'});
+document.getElementById('spend').innerText = spend.toLocaleString('en-IN', {
+				    maximumFractionDigits: 2, style: 'currency',   currency: 'INR'});
+
+// (spend*50).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+</script>
+</body>
+</html>
+
