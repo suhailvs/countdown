@@ -29,7 +29,9 @@ li span {
   display: block;
   font-size: 4.5rem;
 }
-
+#spend {
+  font-size: 3rem;
+}
 /* general styling */
 html, body {
   height: 100%;
